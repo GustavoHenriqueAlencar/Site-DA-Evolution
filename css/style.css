@@ -140,7 +140,7 @@ nav {
 /* Hero Section */
 .hero {
     height: 90vh;
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../img/Sem Título-1.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../img/Sem Título-1.png') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,14 +150,14 @@ nav {
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     margin-bottom: 20px;
     line-height: 1;
     font-weight: 900;
 }
 
 .hero p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 40px;
     max-width: 800px;
     margin-left: auto;
@@ -173,27 +173,44 @@ nav {
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
-    border: none;
     transition: var(--transition);
+    text-align: center;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: white;
 }
 
-.btn-primary { background-color: var(--primary-color); color: white; }
-.btn-primary:hover { background-color: #b3151b; transform: scale(1.05); }
+.btn-hero {
+    min-width: 250px;
+    margin: 10px;
+    font-size: 1rem;
+}
 
-.btn-outline { border: 2px solid var(--primary-color); color: white; }
+.btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(227, 27, 35, 0.3);
+    color: white;
+}
+
+/* Redefining primary for hover consistency if needed, but the base .btn now covers it */
+.btn-primary:hover { background-color: var(--primary-color); }
 .btn-outline:hover { background-color: var(--primary-color); }
 
 .btn-small {
-    padding: 10px 25px;
+    padding: 12px 25px;
     font-size: 0.85rem;
-    background-color: var(--primary-color);
-    color: white;
-    margin-top: 20px;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(227, 27, 35, 0.2);
 }
 
 /* Categories */
 #categories { padding: 100px 0; }
-.categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
 
 .category-card {
     background: var(--card-bg);
@@ -203,88 +220,92 @@ nav {
     transition: var(--transition);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .category-card:hover { border-color: var(--primary-color); transform: translateY(-5px); }
 
 .card-img {
-    height: 350px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 30px;
     border-bottom: 1px solid #222;
+    background-color: #050505;
 }
 
 .specialty-logo {
-    max-height: 95% !important;
+    max-height: 85%;
     width: auto;
     object-fit: contain;
 }
 
 .card-info {
     padding: 40px;
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .content-wrapper {
-    flex-grow: 1;
+    margin-bottom: 30px;
 }
 
 .btn-bottom {
-    margin-top: auto;
     align-self: flex-start;
+    width: auto;
 }
 
-.card-info h3 { font-size: 2rem; margin-bottom: 10px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+.card-info h3 { font-size: 2rem; margin-bottom: 15px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
 
-.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-.features li { margin-bottom: 8px; font-size: 0.95rem; }
-.features i { margin-right: 10px; font-size: 0.8rem; }
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+.features li { margin-bottom: 8px; font-size: 0.95rem; display: flex; align-items: center; }
+.features i { margin-right: 12px; font-size: 0.8rem; flex-shrink: 0; }
 
 .brand-box {
     grid-column: span 2;
-    margin-top: 30px;
+    margin-top: 25px;
     padding: 20px;
     background: rgba(227, 27, 35, 0.05);
     border-radius: 8px;
-    border: 1px solid rgba(227, 27, 35, 0.2);
+    border: 1px solid rgba(227, 27, 35, 0.1);
 }
 
-.brand-box h4 { font-size: 0.9rem; margin-bottom: 15px; text-align: center; }
+.brand-box h4 { font-size: 0.85rem; margin-bottom: 15px; text-align: center; color: var(--text-gray); }
 
 .brand-logos-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 30px; /* Aumentado o espaçamento */
+    gap: 25px;
 }
 
 .brand-icon {
-    height: 35px; /* Tamanho padronizado */
-    max-width: 100px;
+    height: 30px;
+    max-width: 90px;
     width: auto;
     object-fit: contain;
-    filter: invert(1) brightness(100); /* Força as logos escuras a ficarem totalmente brancas */
+    filter: invert(1) brightness(100);
 }
 
 .brand-icon.no-filter {
-    filter: none; /* Mantém logos que já possuem cor correta (ex: Fila) */
+    filter: none;
 }
 
 /* About */
 #sobre { padding: 100px 0; }
 .about-flex { display: flex; align-items: center; gap: 60px; }
-.about-text { flex: 1; }
-.about-img { flex: 1; }
-.about-img img { border-radius: 4px; box-shadow: 20px 20px 0 var(--primary-color); }
+.about-text { flex: 1.2; }
+.about-text p { margin-bottom: 25px; font-size: 1.05rem; line-height: 1.8; }
+.about-img { flex: 0.8; }
+.about-img img { border-radius: 4px; box-shadow: 15px 15px 0 var(--primary-color); width: 100%; object-fit: cover; }
 
 .stats { display: flex; gap: 50px; margin-top: 40px; }
-.stat-item .number { display: block; font-size: 3rem; font-weight: 900; color: var(--primary-color); line-height: 1; }
-.stat-item .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+.stat-item .number { display: block; font-size: 2.5rem; font-weight: 900; color: var(--primary-color); line-height: 1; margin-bottom: 5px; }
+.stat-item .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-gray); }
 
 /* Contact */
 #contato { padding: 100px 0; }
@@ -292,13 +313,14 @@ nav {
 
 .map-container {
     margin-bottom: 30px;
-    border: 2px solid var(--primary-color);
+    border: 1px solid #333;
     border-radius: 8px;
     overflow: hidden;
     line-height: 0;
 }
 
-.dark-box { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid #222; display: flex; align-items: center; margin-bottom: 20px; }
+.dark-box { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid #222; display: flex; align-items: center; margin-bottom: 20px; transition: var(--transition); }
+.dark-box:hover { border-color: var(--primary-color); background: #161616; }
 .dark-box i { font-size: 1.8rem; color: var(--primary-color); margin-right: 25px; width: 40px; text-align: center; }
 
 .social-btn {
@@ -312,19 +334,22 @@ nav {
     margin-bottom: 15px;
     font-weight: 700;
     border: 1px solid #333;
+    background: transparent;
+    border: 1px solid #333;
 }
 
 .social-btn i { margin-right: 15px; font-size: 1.3rem; }
-.social-btn.instagram:hover { background: var(--primary-color); border-color: var(--primary-color); }
+.social-btn:hover { background: var(--primary-color); border-color: var(--primary-color); transform: translateY(-3px); color: white; }
 
 .social-btn.whatsapp-btn {
-    background-color: #25d366;
     border-color: #25d366;
+    color: #25d366;
 }
 
 .social-btn.whatsapp-btn:hover {
-    background-color: #128C7E;
-    border-color: #128C7E;
+    background-color: #25d366;
+    border-color: #25d366;
+    color: white;
 }
 
 /* Footer */
@@ -346,7 +371,9 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
     font-size: 30px;
     z-index: 1000;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: var(--transition);
 }
+.whatsapp-float:hover { transform: scale(1.1); background-color: #128C7E; }
 
 /* Responsive */
 @media (max-width: 992px) {
@@ -357,4 +384,5 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
     .mobile-menu { display: block; }
     .product-grid { grid-template-columns: 1fr; }
     .brand-box { grid-column: span 1; }
+    .btn-hero { width: 100%; margin: 10px 0; }
 }
