@@ -2,64 +2,68 @@
 window.addEventListener('scroll', function() {
     const header = document.querySelector('#header');
     if (window.scrollY > 50) {
-        header.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
-        header.style.padding = '10px 0';
+        header.classList.add('header-scrolled');
     } else {
-        header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
-        header.style.padding = '20px 0';
+        header.classList.remove('header-scrolled');
     }
 });
 
 // Mobile Menu Toggle
 const mobileMenu = document.querySelector('.mobile-menu');
 const navLinks = document.querySelector('.nav-links');
+const body = document.querySelector('body');
 
 mobileMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
     navLinks.classList.toggle('active');
-    // Basic toggle animation or display
-    if(navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-    } else {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '100%';
-        navLinks.style.left = '0';
-        navLinks.style.width = '100%';
-        navLinks.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
-        navLinks.style.padding = '20px';
-    }
+    body.classList.toggle('no-scroll');
 });
 
 // Smooth Scroll for all links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        // Close mobile menu if open
-        if(window.innerWidth <= 992) {
-            navLinks.style.display = 'none';
-        }
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            mobileMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('no-scroll');
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
-// Intersection Observer for animations (Optional enhancement)
+// Intersection Observer for animations
 const observerOptions = {
-    threshold: 0.2
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
+            entry.target.classList.add('animate-in');
+            // Once animated, no need to observe anymore
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-document.querySelectorAll('.category-card, .about-text, .about-img').forEach(el => {
+// Select elements to animate
+document.querySelectorAll('.category-card, .about-text, .about-img, .info-box, .social-links, .hero-content').forEach(el => {
+    el.classList.add('reveal');
     observer.observe(el);
 });
