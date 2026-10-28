@@ -7,7 +7,11 @@
     <meta name="description" content="DA Evolution - Referência em suplementação esportiva e moda fitness feminina. Evolua seu corpo com qualidade e estilo.">
 
     <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" href="img/logo-da-unido.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,29 +29,22 @@
     <!-- Header / Navbar -->
     <header id="header">
         <nav class="container">
-            <div class="logo">
-                <div class="logo-imgs">
-                    <img src="img/LogoDAMas.png" alt="DA Evolution Logo Masculino" class="main-logo">
-                    <img src="img/LogoDAFem.png" alt="DA Evolution Logo Feminino" class="main-logo">
-                </div>
-                <div class="header-titles-mobile">
+            <a href="#home" class="logo" aria-label="DA Evolution - Início">
+                <img src="img/logo-da-unido.png" alt="DA Evolution" class="main-logo">
+                <div class="header-titles">
                     <span class="logo-text">DA <span class="highlight">EVOLUTION</span></span>
+                    <span class="subtitle">Nutrição Esportiva | Fitness &amp; Lifestyle</span>
                 </div>
-            </div>
-            <div class="header-titles">
-                <span class="logo-text">DA <span class="highlight">EVOLUTION</span></span>
-                <span class="subtitle">Nutrição Esportiva | Fitness & Lifestyle</span>
-            </div>
+            </a>
             <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#nutricao">Nutrição</a></li>
-                <li><a href="#moda">Moda Feminina</a></li>
-                <li><a href="#sobre">Quem Somos</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#nutricao" class="nav-link">Nutrição</a></li>
+                <li><a href="#moda" class="nav-link">Moda Feminina</a></li>
+                <li><a href="#sobre" class="nav-link">Quem Somos</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+                <li class="nav-cta-item"><a href="https://wa.me/556133851717?text=Olá%2C%20vim%20pelo%20site%20da%20DA%20Evolution" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
             </ul>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
+            <button class="mobile-menu" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
         </nav>
     </header>
 
@@ -77,20 +74,38 @@
                 <div class="card-info">
                     <div class="content-wrapper">
                         <h3 class="text-white">Nutrição Esportiva</h3>
-                        <p class="text-gray">Apoio nutricional completo com os melhores suplementos para potencializar sua performance e saúde.</p>
+                        <p class="text-gray">Apoio nutricional completo com os melhores suplementos para potencializar sua performance, saúde e resultados reais.</p>
                         <div class="product-grid">
                             <ul class="features text-white">
-                                <li><i class="fas fa-caret-right highlight"></i> Whey Protein</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Creatina</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Pré-treino</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Hipercalórico</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Whey Protein (Conc., Isolado, 3W, etc.)</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Creatina Monohidratada, Creapure, etc.</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Pré-treinos, Termogênicos & Estimulantes</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Hipercalóricos & Massa Muscular</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Aminoácidos (BCAA, Glutamina, etc.)</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Proteínas Vegetais & Linha Vegana</li>
                             </ul>
                             <ul class="features text-white">
-                                <li><i class="fas fa-caret-right highlight"></i> Vitaminas & Suplementos</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Barras de Proteína</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Termogênico</li>
-                                <li><i class="fas fa-caret-right highlight"></i> Acessórios de Academia</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Vitaminas & Minerais (D3, B12, Zinco, etc.)</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Ômega-3, DHA, Coenzima Q10, etc.</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Barras Proteicas, Snacks, Pastas, etc.</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Colágenos (Hidrolisado, Verisol, etc.)</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Eletrólitos, Isotônicos & Hidratação</li>
+                                <li><i class="fas fa-caret-right highlight"></i> Coqueteleiras, Acessórios e muito mais</li>
                             </ul>
+                            <div class="brand-box">
+                                <h4>Marcas Parceiras:</h4>
+                                <div class="brand-logos-grid nutrition-logos-grid">
+                                    <div class="brand-item" title="DUX Nutrition"><img src="img/logos/dux-nutrition.png" alt="DUX Nutrition" class="brand-icon"></div>
+                                    <div class="brand-item" title="Max Titanium"><img src="img/logos/max-titanium.png" alt="Max Titanium" class="brand-icon logo-wide"></div>
+                                    <div class="brand-item" title="Integralmédica"><img src="img/logos/integralmedica.svg" alt="Integralmédica" class="brand-icon"></div>
+                                    <div class="brand-item" title="Adaptogen Science"><img src="img/logos/adaptogen.png" alt="Adaptogen Science" class="brand-icon logo-wide"></div>
+                                    <div class="brand-item" title="Essential Nutrition"><img src="img/logos/essential-nutrition.svg" alt="Essential Nutrition" class="brand-icon"></div>
+                                    <div class="brand-item" title="Probiótica"><img src="img/logos/probiotica.png" alt="Probiótica" class="brand-icon logo-wide"></div>
+                                    <div class="brand-item" title="Vitafor"><img src="img/logos/vitafor.png" alt="Vitafor" class="brand-icon logo-wide"></div>
+                                    <div class="brand-item" title="Black Skull"><img src="img/logos/blackskull.svg" alt="Black Skull" class="brand-icon logo-compact"></div>
+                                    <div class="brand-item" title="Darkness"><img src="img/logos/darkness.png" alt="Darkness" class="brand-icon"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <a href="https://wa.me/556133851717?text=Olá%2C%20vim%20pelo%20site%20da%20DA%20Evolution" target="_blank" class="btn btn-small btn-bottom">Consultar Disponibilidade</a>
@@ -105,32 +120,32 @@
                 <div class="card-info">
                     <div class="content-wrapper">
                         <h3 class="text-white">Moda Fitness Feminina</h3>
-                        <p class="text-gray">Coleções exclusivas que unem conforto e tecnologia para o seu treino ser mais confiante e estiloso.</p>
+                        <p class="text-gray">Coleções exclusivas que unem conforto, sustentação e tecnologia têxtil para o seu treino ser mais confiante e estiloso.</p>
                         <div class="product-grid">
                             <ul class="features text-white">
-                                <li><i class="fas fa-tag highlight"></i> Conjuntos</li>
-                                <li><i class="fas fa-tag highlight"></i> Tops</li>
-                                <li><i class="fas fa-tag highlight"></i> Leggings</li>
-                                <li><i class="fas fa-tag highlight"></i> Macacões</li>
-                                <li><i class="fas fa-tag highlight"></i> Macaquinhos</li>
-                                <li><i class="fas fa-tag highlight"></i> Shorts</li>
+                                <li><i class="fas fa-tag highlight"></i> Conjuntos Fitness & Casuais</li>
+                                <li><i class="fas fa-tag highlight"></i> Tops com Alta Sustentação</li>
+                                <li><i class="fas fa-tag highlight"></i> Leggings (Zero Transparência, etc.)</li>
+                                <li><i class="fas fa-tag highlight"></i> Macacões & Macaquinhos</li>
+                                <li><i class="fas fa-tag highlight"></i> Shorts, Bermudas & Shorts-Saia</li>
+                                <li><i class="fas fa-tag highlight"></i> Croppeds, Camisetas & Regatas</li>
                             </ul>
                             <ul class="features text-white">
-                                <li><i class="fas fa-tag highlight"></i> Meias</li>
-                                <li><i class="fas fa-tag highlight"></i> Croppeds</li>
-                                <li><i class="fas fa-tag highlight"></i> Camisetas</li>
-                                <li><i class="fas fa-tag highlight"></i> Regatas</li>
-                                <li><i class="fas fa-tag highlight"></i> Casacos</li>
-                                <li><i class="fas fa-tag highlight"></i> Corta-vento</li>
+                                <li><i class="fas fa-tag highlight"></i> Casacos, Corta-ventos & Moletons</li>
+                                <li><i class="fas fa-tag highlight"></i> Meias, Polainas & Manguitos</li>
+                                <li><i class="fas fa-tag highlight"></i> Linha Seamless (Sem Costura)</li>
+                                <li><i class="fas fa-tag highlight"></i> Moda Beach Tennis & Corrida</li>
+                                <li><i class="fas fa-tag highlight"></i> Acessórios, Viseiras e muito mais</li>
+                                <li><i class="fas fa-tag highlight"></i> Novidades & Reposições Semanais</li>
                             </ul>
                             <div class="brand-box">
                                 <h4>Marcas Selecionadas:</h4>
-                                <div class="brand-logos-grid">
-                                    <img src="img/logos/idMkBGtj7U_logos.svg" alt="Lupo" class="brand-icon">
-                                    <img src="img/logo_letsgym_horizontal_semfundo_-_pequeno.png" alt="Let's Gym" class="brand-icon">
-                                    <img src="img/Adidas_logo.png" alt="Adidas" class="brand-icon">
-                                    <img src="img/logos/Logo.svg" alt="Nike" class="brand-icon">
-                                    <img src="img/logos/idye2JUq8g_1773171064019.svg" alt="Fila" class="brand-icon no-filter">
+                                <div class="brand-logos-grid fashion-logos-grid">
+                                    <div class="brand-item" title="Lupo"><img src="img/logos/idMkBGtj7U_logos.svg" alt="Lupo" class="brand-icon"></div>
+                                    <div class="brand-item" title="Nike"><img src="img/logos/Logo.svg" alt="Nike" class="brand-icon"></div>
+                                    <div class="brand-item" title="Adidas"><img src="img/Adidas_logo.png" alt="Adidas" class="brand-icon"></div>
+                                    <div class="brand-item" title="Let's Gym"><img src="img/logo_letsgym_horizontal_semfundo_-_pequeno.png" alt="Let's Gym" class="brand-icon"></div>
+                                    <div class="brand-item" title="Fila"><img src="img/logos/idye2JUq8g_1773171064019.svg" alt="Fila" class="brand-icon no-filter"></div>
                                 </div>
                             </div>
                         </div>
@@ -146,49 +161,50 @@
         <div class="container about-flex">
             <div class="about-text">
                 <div class="about-badge">
-                    <i class="fas fa-heart highlight"></i> Cuidar também é amar! 💛
+                    O básico que funciona
                 </div>
                 <div class="section-title text-left">
                     <h2 class="text-white">Sobre a <span class="highlight">DA Evolution</span></h2>
                 </div>
-                <p class="text-white">Na <strong>DA Evolution</strong>, acreditamos que a verdadeira evolução vai além do físico: ela nasce do cuidado diário, do acolhimento e da constância. Mais do que uma loja no Setor Central do Gama, somos um ponto de encontro e uma <strong>comunidade apaixonada</strong> por saúde, superação e bem-estar. Desde os nossos tradicionais cafés da manhã até cada detalhe que preparamos com carinho para os nossos clientes e parceiros, nosso propósito é caminhar ao seu lado em todas as fases da vida.</p>
-                <p class="text-gray">Com o lema <em>"Referência de palco, mentalidade de campeão!"</em>, nossa curadoria de <strong>Nutrição Esportiva</strong> apoia desde atletas de alta performance até quem está dando os primeiros passos rumo a uma vida saudável. Caminhamos lado a lado com nutricionistas incríveis, oferecendo suporte consultivo e as marcas mais consagradas do mercado nacional e internacional (como Dux Nutrition, Essential, Max Titanium, Vitafor, Probiótica, IntegralMedica e Adaptogen) com garantia inegociável de procedência e originalidade.</p>
-                <p class="text-gray">No segmento de <strong>Moda Fitness & Lifestyle</strong>, unimos tecnologia têxtil de ponta (como a tecnologia Seamless Dry sem costura) ao caimento impecável e sofisticado. Como revendedores autorizados de marcas renomadas como Lupo (Linha Max Lupo), Velvet Name Chantilly, Let's Gym, Nike, Adidas e Fila, selecionamos looks versáteis que oferecem conforto e segurança máxima do treino pesado ao dia a dia casual.</p>
-                
+                <p class="text-white">Na <strong>DA Evolution</strong>, nós acreditamos em uma verdade simples e inegociável: <strong>o básico que funciona</strong>. Não vendemos promessas mágicas nem fórmulas milagrosas. Entendemos que a verdadeira evolução corporal, estética e de saúde é construída no dia a dia: com disciplina, constância, treino bem feito e as escolhas certas.</p>
+                <p class="text-gray">Nossa curadoria de <strong>Nutrição Esportiva</strong> trabalha exclusivamente com as marcas mais respeitadas do mercado nacional e internacional (como DUX, Max Titanium, Integralmédica, Vitafor, Essential Nutrition, Probiótica e Adaptogen). Garantimos 100% de laudos comprovados, pureza e procedência em cada pote. Do iniciante ao atleta de alta performance, prestamos um atendimento consultivo e honesto para você investir apenas naquilo que seu corpo realmente precisa.</p>
+                <p class="text-gray">No segmento de <strong>Moda Fitness</strong>, trazemos peças selecionadas de marcas consagradas como Lupo, Let's Gym, Nike, Adidas e Fila. Roupas com tecnologia de compressão, tecido sem costura e durabilidade real, projetadas para oferecer sustentação impecável durante o treino pesado e versatilidade com estilo para o seu dia a dia.</p>
+                <p class="text-gray">Localizada no coração do <a href="https://www.google.com/maps/place/D.A+Evolution+%7C+Nutri%C3%A7%C3%A3o+esportiva/@-16.0197701,-48.0729221,17z" target="_blank" rel="noopener noreferrer" class="address-link" title="Ver no Google Maps"><i class="fas fa-map-marker-alt highlight"></i> <strong>Setor Central do Gama (Quadra 30, Loja 38 - Gama/DF)</strong></a>, a DA Evolution combina a comodidade da pronta entrega via motoboy em toda a região com uma experiência transparente, focada naquilo que de fato gera resultado.</p>
+
                 <div class="about-pillars">
                     <div class="pillar-card">
-                        <i class="fas fa-heart-pulse"></i>
+                        <i class="fas fa-check-circle"></i>
                         <div>
-                            <h4>Cuidado em Todas as Fases</h4>
-                            <p>Suplementação individualizada e consciente para sua saúde, longevidade e rotina.</p>
+                            <h4>O Básico que Funciona</h4>
+                            <p>Foco naquilo que gera resultado real: constância, disciplina e suplementação consciente.</p>
                         </div>
                     </div>
                     <div class="pillar-card">
-                        <i class="fas fa-trophy"></i>
+                        <i class="fas fa-certificate"></i>
                         <div>
-                            <h4>Mentalidade Campeã</h4>
-                            <p>Disciplina, apoio a atletas e consultoria para você superar qualquer limite.</p>
+                            <h4>100% Procedência & Laudos</h4>
+                            <p>Produtos originais lacrados direto das melhores marcas do mercado.</p>
                         </div>
                     </div>
                     <div class="pillar-card">
-                        <i class="fas fa-mug-hot"></i>
+                        <i class="fas fa-user-check"></i>
                         <div>
-                            <h4>Comunidade & Conexão</h4>
-                            <p>Cafés da manhã especiais, acolhimento caloroso e atendimento humanizado.</p>
+                            <h4>Consultoria Transparente</h4>
+                            <p>Indicações precisas para seu objetivo, sem empurrar produtos desnecessários.</p>
                         </div>
                     </div>
                     <div class="pillar-card">
                         <i class="fas fa-motorcycle"></i>
                         <div>
                             <h4>Agilidade no Gama & Região</h4>
-                            <p>Retirada imediata na loja e entrega expressa via motoboy para sua comodidade.</p>
+                            <p>Retirada rápida na loja física ou entrega expressa por motoboy no seu endereço.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="number">100%</span>
+                        <span class="number" data-target="100">100%</span>
                         <span class="label text-white">Originalidade</span>
                     </div>
                     <div class="stat-item">
@@ -196,8 +212,8 @@
                         <span class="label text-white">Setor Central</span>
                     </div>
                     <div class="stat-item">
-                        <span class="number">Curadoria</span>
-                        <span class="label text-white">Especializada</span>
+                        <span class="number">Zero</span>
+                        <span class="label text-white">Fórmulas Mágicas</span>
                     </div>
                     <div class="stat-item">
                         <span class="number">Express</span>
@@ -206,7 +222,7 @@
                 </div>
             </div>
             <div class="about-img">
-                <img src="img/IMG_9848.JPG.jpeg" alt="Loja DA Evolution">
+                <img src="img/capa.png" alt="Loja DA Evolution">
             </div>
         </div>
     </section>
@@ -229,6 +245,23 @@
                     </div>
                 </div>
                 <div class="info-box dark-box">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <div class="hours-header">
+                            <h4 class="text-white">Horário de Funcionamento</h4>
+                            <span id="store-status" class="store-status-badge status-open">
+                                <span class="status-dot pulse"></span>
+                                <span class="status-text">Verificando...</span>
+                            </span>
+                        </div>
+                        <p class="text-gray hours-text">
+                            <span><strong>Seg a Qui:</strong> 08h às 21h</span> &bull; 
+                            <span><strong>Sexta:</strong> 08h às 20h</span> &bull; 
+                            <span><strong>Sábado:</strong> 09h às 18h</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="info-box dark-box">
                     <i class="fas fa-phone"></i>
                     <div>
                         <h4 class="text-white">WhatsApp / Contato</h4>
@@ -244,6 +277,20 @@
                 </div>
             </div>
             <div class="social-links">
+                <a href="https://g.page/r/CcLHvFrHEaXXEBM/review" target="_blank" rel="noopener noreferrer" class="google-review-card" title="Ver avaliações no Google">
+                    <div class="google-badge-header">
+                        <i class="fab fa-google google-icon"></i>
+                        <div class="google-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-num">5.0</span>
+                    </div>
+                    <p class="google-review-text">A loja mais bem avaliada do Gama &bull; <strong>Avaliações reais no Google</strong> <i class="fas fa-arrow-up-right-from-square"></i></p>
+                </a>
                 <h4 class="text-white">Nossas Redes</h4>
                 <div class="social-btns">
                     <a href="https://www.instagram.com/da.evolution.nutricaoesportiva" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i>da.evolution.nutricaoesportiva</a>
@@ -257,7 +304,12 @@
     <!-- Footer -->
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2026 DA Evolution Nutrição Esportiva e Moda Fitness. Todos os direitos reservados. &bull; <a href="privacy.html" class="footer-link">Política de Privacidade</a></p>
+            <p>&copy; 2026 DA Evolution Nutrição Esportiva e Moda Fitness. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="privacy.html" class="footer-link">Política de Privacidade</a>
+                <span class="footer-divider">&bull;</span>
+                <a href="terms.html" class="footer-link">Termos e Responsabilidade</a>
+            </div>
         </div>
     </footer>
 
@@ -266,6 +318,9 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- GSAP & ScrollTrigger Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

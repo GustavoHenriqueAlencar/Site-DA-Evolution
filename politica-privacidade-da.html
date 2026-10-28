@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade | DA Evolution</title>
+    <meta name="description" content="Política de Privacidade oficial da DA Evolution - Nutrição Esportiva e Moda Fitness. Transparência e conformidade com a LGPD e Meta Cloud API.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/png" href="img/logo-da-unido.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .privacy-topbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #222;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .privacy-topbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .privacy-topbar-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .privacy-topbar-back:hover {
+            color: #ffffff;
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateX(-3px);
+        }
+
+        .privacy-page {
+            padding-top: 40px;
+            padding-bottom: 90px;
+            min-height: calc(100vh - 180px);
+        }
+
+        .privacy-card {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 45px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .privacy-header {
+            border-bottom: 1px solid #262626;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+        }
+
+        .privacy-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .privacy-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .privacy-meta span i {
+            color: var(--primary-color);
+            margin-right: 6px;
+        }
+
+        .privacy-section {
+            margin-bottom: 35px;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 12px;
+        }
+
+        .privacy-section p {
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+
+        .privacy-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .privacy-section ul li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            line-height: 1;
+            top: -1px;
+        }
+
+        .info-highlight-box {
+            background: rgba(227, 27, 35, 0.08);
+            border: 1px solid rgba(227, 27, 35, 0.25);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .info-highlight-box p {
+            color: #e5e5e5;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-card {
+                padding: 30px 22px;
+            }
+            .privacy-page {
+                padding-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Topbar Limpa e Exclusiva de Privacidade -->
+    <header class="privacy-topbar">
+        <div class="container privacy-topbar-container">
+            <a href="index.html" class="logo" aria-label="DA Evolution - Início">
+                <img src="img/logo-da-unido.png" alt="DA Evolution" class="main-logo">
+                <div class="header-titles">
+                    <span class="logo-text">DA <span class="highlight">EVOLUTION</span></span>
+                    <span class="subtitle">Nutrição Esportiva | Fitness &amp; Lifestyle</span>
+                </div>
+            </a>
+            <a href="index.html" class="privacy-topbar-back">
+                <i class="fas fa-arrow-left"></i> <span>Voltar ao site</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="privacy-page container">
+
+        <article class="privacy-card">
+            <header class="privacy-header">
+                <h1>Política de Privacidade</h1>
+                <div class="privacy-meta">
+                    <span><i class="fas fa-calendar-check"></i> Última atualização: 23 de Outubro de 2026</span>
+                    <span><i class="fas fa-building"></i> DA EVOLUTION (CNPJ: 40.499.240/0001-05)</span>
+                    <span><i class="fas fa-shield-halved"></i> Em conformidade com a LGPD e Meta Cloud API</span>
+                </div>
+            </header>
+
+            <section class="privacy-section">
+                <h2>1. Identificação do Controlador</h2>
+                <p>
+                    Esta Política de Privacidade aplica-se aos dados tratados pela <strong>DA EVOLUTION</strong> (Nutrição Esportiva e Moda Fitness), pessoa jurídica de direito privado inscrita no CNPJ sob o nº <strong>40.499.240/0001-05</strong>, com sede física no Setor Central Quadra 30 CL 30 Lote 38 - Gama, Brasília - DF, CEP 72405-300.
+                </p>
+                <p>
+                    Nosso compromisso é respeitar e proteger a privacidade, a intimidade e os dados pessoais de todos os nossos clientes, visitantes do site e usuários atendidos pelos nossos canais digitais e presenciais.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>2. Coleta de Informações</h2>
+                <p>
+                    A DA Evolution coleta e processa dados pessoais fornecidos de forma consciente e espontânea pelo titular, incluindo:
+                </p>
+                <ul>
+                    <li><strong>Dados de identificação e contato:</strong> Nome, telefone de contato/WhatsApp e e-mail (quando aplicável);</li>
+                    <li><strong>Dados de entrega:</strong> Endereço completo para envios via motoboy no Gama e regiões vizinhas;</li>
+                    <li><strong>Histórico de atendimento e pedidos:</strong> Registros das conversas e interações mantidas através do WhatsApp Business para fins de suporte, cotação de suplementos, pedidos e fidelização;</li>
+                    <li><strong>Dados de navegação:</strong> Informações técnicas básicas necessárias para o correto funcionamento das páginas web (sem rastreamento invasivo).</li>
+                </ul>
+            </section>
+
+            <section class="privacy-section">
+                <h2>3. Finalidades do Tratamento de Dados</h2>
+                <p>
+                    As informações coletadas são utilizadas estrita e exclusivamente para propósitos legítimos e transparentes, tais como:
+                </p>
+                <ul>
+                    <li>Atendimento consultivo e humanizado ao cliente sobre suplementação, tamanhos e disponibilidade de peças de moda fitness;</li>
+                    <li>Orçamentos, processamento de pedidos, entrega rápida e agendamento de retiradas na loja física;</li>
+                    <li>Gestão do programa de fidelidade e pontuação por compras;</li>
+                    <li>Comunicação de pós-venda, orientações sobre produtos e pesquisas de satisfação;</li>
+                    <li>Cumprimento de obrigações fiscais, tributárias e regulatórias vigentes no Brasil.</li>
+                </ul>
+            </section>
+
+            <section class="privacy-section">
+                <h2>4. Integração com o WhatsApp Business Platform (Meta Cloud API)</h2>
+                <p>
+                    A DA Evolution utiliza a infraestrutura oficial da <strong>Meta Cloud API</strong> para automação e gestão de atendimentos via WhatsApp.
+                </p>
+                <div class="info-highlight-box">
+                    <p>
+                        <i class="fas fa-lock highlight"></i> <strong>Garantia de Confidencialidade:</strong> As mensagens trocadas em nosso canal de WhatsApp são transmitidas com segurança criptografada segundo os padrões mundiais da Meta. Nenhum dado pessoal, histórico de conversa ou número de telefone de nossos clientes é comercializado, alugado ou transferido para terceiros para finalidades publicitárias externas.
+                    </p>
+                </div>
+            </section>
+
+            <section class="privacy-section">
+                <h2>5. Compartilhamento Restrito de Dados</h2>
+                <p>
+                    A DA Evolution não comercializa dados sob hipótese alguma. O compartilhamento ocorre exclusivamente nos limites indispensáveis para a prestação do serviço:
+                </p>
+                <ul>
+                    <li><strong>Logística e Entregas:</strong> Repasse do endereço de entrega e telefone ao motoboy designado para conclusão do pedido solicitado pelo cliente;</li>
+                    <li><strong>Provedores de Tecnologia:</strong> Plataformas de mensageria oficial (Meta) e hospedagem técnica do site/sistema com cláusulas rígidas de sigilo;</li>
+                    <li><strong>Autoridades Governamentais:</strong> Quando requisitado por ordem judicial ou para emissão de documentos fiscais obrigatórios.</li>
+                </ul>
+            </section>
+
+            <section class="privacy-section">
+                <h2>6. Segurança e Armazenamento</h2>
+                <p>
+                    Adotamos medidas técnicas, administrativas e organizacionais adequadas para proteger os dados pessoais contra acessos não autorizados, destruição, perda, alteração ou qualquer forma de tratamento ilícito. O acesso às informações de atendimento é restrito a colaboradores autorizados da DA Evolution.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>7. Seus Direitos (LGPD - Lei 13.709/2018)</h2>
+                <p>
+                    Na qualidade de titular dos dados pessoais, você pode exercer seus direitos a qualquer momento, conforme o Artigo 18 da Lei Geral de Proteção de Dados:
+                </p>
+                <ul>
+                    <li>Confirmar a existência do tratamento de dados;</li>
+                    <li>Acessar seus dados pessoais armazenados;</li>
+                    <li>Solicitar a correção de dados incompletos, inexatos ou desatualizados;</li>
+                    <li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+                    <li>Revogar seu consentimento para contatos promocionais ou comunicações ativas.</li>
+                </ul>
+            </section>
+
+            <section class="privacy-section">
+                <h2>8. Solicitação de Exclusão de Dados</h2>
+                <p>
+                    Para solicitar a alteração, revogação ou exclusão definitiva de seus registros e histórico de atendimento, basta enviar uma mensagem direta informando sua intenção para o nosso canal oficial de atendimento no WhatsApp: <strong>(61) 3385-1717</strong>. Sua solicitação será atendida no menor prazo técnico possível.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>9. Canal de Contato e DPO (Encarregado)</h2>
+                <p>
+                    Para dúvidas sobre esta Política de Privacidade ou sobre as práticas de proteção de dados da DA Evolution, entre em contato diretamente conosco:
+                </p>
+                <div class="info-highlight-box">
+                    <p>
+                        <strong>DA EVOLUTION - Nutrição Esportiva & Moda Fitness</strong><br>
+                        Setor Central Quadra 30 CL 30 Lote 38 - Gama, Brasília - DF, CEP 72405-300<br>
+                        Telefone / WhatsApp Comercial: <strong>(61) 3385-1717</strong><br>
+                        Instagram: <a href="https://www.instagram.com/da.evolution.nutricaoesportiva" target="_blank" class="footer-link">@da.evolution.nutricaoesportiva</a> | <a href="https://www.instagram.com/d.a.evolution.modafitness" target="_blank" class="footer-link">@d.a.evolution.modafitness</a>
+                    </p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 DA Evolution Nutrição Esportiva e Moda Fitness. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Início</a>
+                <span class="footer-divider">&bull;</span>
+                <a href="privacy.html" class="footer-link">Política de Privacidade</a>
+                <span class="footer-divider">&bull;</span>
+                <a href="terms.html" class="footer-link">Termos e Responsabilidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/556133851717?text=Olá%2C%20vim%20pela%20Política%20de%20Privacidade%20do%20site%20da%20DA%20Evolution" class="whatsapp-float" target="_blank" title="Falar no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>

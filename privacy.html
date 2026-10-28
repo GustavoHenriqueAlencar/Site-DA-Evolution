@@ -7,7 +7,12 @@
     <meta name="description" content="Política de Privacidade oficial da DA Evolution - Nutrição Esportiva e Moda Fitness. Transparência e conformidade com a LGPD e Meta Cloud API.">
 
     <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/png" href="img/logo-da-unido.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,10 +26,50 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        .privacy-topbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #222;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .privacy-topbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .privacy-topbar-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .privacy-topbar-back:hover {
+            color: #ffffff;
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateX(-3px);
+        }
+
         .privacy-page {
-            padding-top: 130px;
+            padding-top: 40px;
             padding-bottom: 90px;
-            min-height: 100vh;
+            min-height: calc(100vh - 180px);
         }
 
         .privacy-card {
@@ -121,64 +166,36 @@
             font-size: 0.95rem;
         }
 
-        .privacy-back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 25px;
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-
-        .privacy-back-btn:hover {
-            color: var(--primary-color);
-            transform: translateX(-5px);
-        }
-
         @media (max-width: 768px) {
             .privacy-card {
                 padding: 30px 22px;
             }
             .privacy-page {
-                padding-top: 100px;
+                padding-top: 30px;
             }
         }
     </style>
 </head>
 <body class="bg-black">
 
-    <!-- Header / Navbar -->
-    <header id="header" class="header-scrolled">
-        <nav class="container">
-            <div class="logo">
-                <a href="index.html" class="logo-imgs">
-                    <img src="img/LogoDAMas.png" alt="DA Evolution Logo Masculino" class="main-logo">
-                    <img src="img/LogoDAFem.png" alt="DA Evolution Logo Feminino" class="main-logo">
-                </a>
+    <!-- Topbar Limpa e Exclusiva de Privacidade -->
+    <header class="privacy-topbar">
+        <div class="container privacy-topbar-container">
+            <a href="index.html" class="logo" aria-label="DA Evolution - Início">
+                <img src="img/logo-da-unido.png" alt="DA Evolution" class="main-logo">
                 <div class="header-titles">
                     <span class="logo-text">DA <span class="highlight">EVOLUTION</span></span>
-                    <span class="subtitle">Nutrição Esportiva | Fitness & Lifestyle</span>
+                    <span class="subtitle">Nutrição Esportiva | Fitness &amp; Lifestyle</span>
                 </div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html#home">Início</a></li>
-                <li><a href="index.html#nutricao">Nutrição</a></li>
-                <li><a href="index.html#moda">Moda Feminina</a></li>
-                <li><a href="index.html#sobre">Quem Somos</a></li>
-                <li><a href="index.html#contato">Contato</a></li>
-            </ul>
-        </nav>
+            </a>
+            <a href="index.html" class="privacy-topbar-back">
+                <i class="fas fa-arrow-left"></i> <span>Voltar ao site</span>
+            </a>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main class="privacy-page container">
-        <a href="index.html" class="privacy-back-btn">
-            <i class="fas fa-arrow-left"></i> Voltar ao site
-        </a>
 
         <article class="privacy-card">
             <header class="privacy-header">
@@ -299,7 +316,14 @@
     <!-- Footer -->
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2026 DA Evolution Nutrição Esportiva e Moda Fitness. Todos os direitos reservados. &bull; <a href="index.html" class="footer-link">Voltar ao Início</a></p>
+            <p>&copy; 2026 DA Evolution Nutrição Esportiva e Moda Fitness. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Início</a>
+                <span class="footer-divider">&bull;</span>
+                <a href="privacy.html" class="footer-link">Política de Privacidade</a>
+                <span class="footer-divider">&bull;</span>
+                <a href="terms.html" class="footer-link">Termos e Responsabilidade</a>
+            </div>
         </div>
     </footer>
 
