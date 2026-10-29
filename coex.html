@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ativação de Coexistência - WhatsApp Cloud API | DA Evolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 p-4 md:p-8 flex items-center justify-center">
+
+    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-6 text-white">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="smartphone" class="w-7 h-7 text-emerald-100"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight">WhatsApp Coexistence (CoEx)</h1>
+                    <p class="text-emerald-100 text-xs md:text-sm mt-0.5">Vincule o WhatsApp do celular à Cloud API sem perder o aplicativo no aparelho.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-8 space-y-6">
+
+            <!-- Banner Informativo -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start gap-3">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                <div class="text-xs md:text-sm text-amber-800 leading-relaxed">
+                    <strong>Atenção:</strong> Esta página deve ser acessada via <strong>HTTPS</strong> (ex: pelo link do seu ngrok ou domínio com SSL). Preencha os campos abaixo com os dados obtidos no <em>Meta for Developers</em> e clique no botão de conexão.
+                </div>
+            </div>
+
+            <!-- Form de Configuração Rápida -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i data-lucide="sliders" class="w-4 h-4 text-emerald-600"></i>
+                    Parâmetros do Aplicativo Meta
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" for="appId">
+                            Meta App ID:
+                        </label>
+                        <input type="text" id="appId" placeholder="Ex: 123456789012345" 
+                               class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1" for="configId">
+                            Configuration ID (config_id):
+                        </label>
+                        <input type="text" id="configId" placeholder="Ex: 987654321098765" 
+                               class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de Ação -->
+            <div class="space-y-3">
+                <button id="btnConnect" onclick="launchWhatsAppOnboarding()" 
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-3 text-base">
+                    <i data-lucide="link" class="w-5 h-5"></i>
+                    <span>Conectar WhatsApp do Celular (Coexistência)</span>
+                </button>
+                <p class="text-center text-xs text-slate-400">
+                    O popup oficial da Meta será aberto. Selecione a opção de manter o aplicativo WhatsApp Business existente.
+                </p>
+            </div>
+
+            <!-- Painel de Logs e Resultados -->
+            <div id="resultBox" class="hidden space-y-4 pt-4 border-t border-slate-200">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i data-lucide="terminal" class="w-4 h-4 text-slate-600"></i>
+                    Retorno da Meta
+                </h3>
+
+                <!-- Cartões com os IDs obtidos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="cardsContainer">
+                    <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                        <span class="text-xs text-emerald-600 font-semibold uppercase">WABA ID</span>
+                        <p id="resWabaId" class="font-mono text-sm font-bold text-slate-800 break-all select-all mt-0.5">-</p>
+                    </div>
+                    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                        <span class="text-xs text-indigo-600 font-semibold uppercase">Phone Number ID</span>
+                        <p id="resPhoneId" class="font-mono text-sm font-bold text-slate-800 break-all select-all mt-0.5">-</p>
+                    </div>
+                </div>
+
+                <!-- Console de Logs -->
+                <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-xs overflow-x-auto max-h-56 space-y-1" id="logConsole">
+                    <p class="text-slate-500">// Aguardando interação...</p>
+                </div>
+            </div>
+
+            <!-- Guia de passos rápidos -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-2">
+                <span class="font-bold text-slate-700 uppercase">Instruções no Popup da Meta:</span>
+                <ol class="list-decimal list-inside space-y-1 text-slate-600">
+                    <li>Faça login com a sua conta do Facebook conectada ao WhatsApp da loja.</li>
+                    <li>Selecione o Portfólio Empresarial (Business Portfolio) da sua empresa.</li>
+                    <li>Quando perguntado, escolha <strong>Conectar aplicativo WhatsApp Business existente</strong>.</li>
+                    <li>Informe o número do celular e valide o código de 6 dígitos que chegará por SMS/WhatsApp.</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="bg-slate-100 px-6 py-3 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+            <span>DA Evolution • Utilitário de Coexistência</span>
+            <a href="/panel.html" class="text-emerald-700 font-semibold hover:underline flex items-center gap-1">
+                <span>Ir para o Painel</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Script de Inicialização e Lógica do SDK -->
+    <script>
+        lucide.createIcons();
+
+        // Carrega configurações pré-salvas do localStorage
+        const storedAppId = localStorage.getItem('meta_app_id');
+        const storedConfigId = localStorage.getItem('meta_config_id');
+        if (storedAppId) document.getElementById('appId').value = storedAppId;
+        if (storedConfigId) document.getElementById('configId').value = storedConfigId;
+
+        function addLog(msg, type = 'info') {
+            const consoleEl = document.getElementById('logConsole');
+            const resultBox = document.getElementById('resultBox');
+            resultBox.classList.remove('hidden');
+
+            const now = new Date().toLocaleTimeString('pt-BR');
+            const line = document.createElement('p');
+            
+            if (type === 'success') line.className = 'text-emerald-300 font-bold';
+            else if (type === 'error') line.className = 'text-red-400 font-bold';
+            else line.className = 'text-slate-300';
+
+            line.textContent = `[${now}] ${msg}`;
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        // Listener para capturar o evento do Embedded Signup retornado pelo popup
+        window.addEventListener('message', function (event) {
+            if (!event.origin.includes('facebook.com')) return;
+
+            try {
+                const data = JSON.parse(event.data);
+                if (data.type === 'WA_EMBEDDED_SIGNUP') {
+                    addLog('✅ Evento WA_EMBEDDED_SIGNUP recebido da Meta!', 'success');
+                    console.log('Dados completos recebidos:', data);
+
+                    const wabaId = data.data?.waba_id || data.data?.wabaId || 'Identificado';
+                    const phoneId = data.data?.phone_number_id || data.data?.phoneNumberId || 'Identificado';
+
+                    document.getElementById('resWabaId').textContent = wabaId;
+                    document.getElementById('resPhoneId').textContent = phoneId;
+
+                    addLog(`WABA ID: ${wabaId}`, 'success');
+                    addLog(`Phone Number ID: ${phoneId}`, 'success');
+                    addLog('🎉 Coexistência ativada com sucesso! Agora você pode atualizar esses dados no application.properties se necessário.', 'success');
+                }
+            } catch (err) {
+                // Mensagens não-JSON ignoradas
+            }
+        });
+
+        // Status do carregamento do SDK
+        let fbSdkLoaded = false;
+
+        // Inicializador assíncrono padrão do Facebook SDK
+        window.fbAsyncInit = function() {
+            fbSdkLoaded = true;
+            addLog('✅ Facebook SDK baixado e pronto no navegador.', 'success');
+        };
+
+        function launchWhatsAppOnboarding() {
+            const appId = document.getElementById('appId').value.trim();
+            const configId = document.getElementById('configId').value.trim();
+
+            if (!appId || !configId) {
+                alert('Por favor, preencha o Meta App ID e o Configuration ID antes de prosseguir.');
+                return;
+            }
+
+            // Verifica se o SDK do Facebook foi bloqueado (AdBlock, uBlock, Brave, etc.)
+            if (typeof FB === 'undefined') {
+                addLog('❌ ERRO: O Facebook SDK (FB) não foi carregado pelo navegador!', 'error');
+                addLog('👉 Causa mais provável: BLOQUEADOR DE ANÚNCIOS (AdBlock, uBlock Origin, Opera ou Brave Shields).', 'error');
+                addLog('👉 Solução: Desative o bloqueador de anúncios / escudos nesta página do ngrok e recarregue (F5).', 'error');
+                alert('O Facebook SDK foi bloqueado pelo seu navegador.\n\nSe você usa AdBlock, uBlock Origin ou o navegador Brave, desative o bloqueador nesta página e recarregue (F5).');
+                return;
+            }
+
+            // Salva no localStorage para facilidade do usuário
+            localStorage.setItem('meta_app_id', appId);
+            localStorage.setItem('meta_config_id', configId);
+
+            addLog(`Inicializando FB SDK com App ID: ${appId}...`);
+
+            try {
+                FB.init({
+                    appId: appId,
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v20.0'
+                });
+
+                addLog(`Disparando FB.login com Configuration ID: ${configId} e featureType: whatsapp_business_app_onboarding...`);
+
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        const code = response.authResponse.code;
+                        addLog(`Autenticação autorizada! Código de autorização recebido: ${code ? code.substring(0, 15) + '...' : 'OK'}`, 'success');
+                    } else {
+                        addLog('O fluxo foi cancelado ou fechado sem autorização completa.', 'error');
+                    }
+                }, {
+                    config_id: configId,
+                    response_type: 'code',
+                    override_default_response_type: true,
+                    extras: {
+                        featureType: 'whatsapp_business_app_onboarding',
+                        sessionInfoVersion: '3',
+                        version: 'v4'
+                    }
+                });
+
+            } catch (error) {
+                addLog(`Erro ao inicializar FB.login: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        // Carregamento assíncrono padrão oficial da Meta com monitoramento de bloqueio
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/pt_BR/sdk.js";
+            js.async = true;
+            js.defer = true;
+            js.crossOrigin = "anonymous";
+            js.onerror = function() {
+                addLog('❌ ERRO DE REDE: O arquivo connect.facebook.net foi bloqueado pelo navegador! Desative o AdBlock/Brave Shields nesta página.', 'error');
+            };
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</body>
+</html>
