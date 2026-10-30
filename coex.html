@@ -221,7 +221,7 @@
                 FB.login(function(response) {
                     if (response.authResponse) {
                         const code = response.authResponse.code;
-                        addLog(`Autenticação autorizada! Código de autorização recebido: ${code ? code.substring(0, 15) + '...' : 'OK'}`, 'success');
+                        addLog(`Autenticação autorizada! Código de autorização recebido: ${code}`, 'success');
                     } else {
                         addLog('O fluxo foi cancelado ou fechado sem autorização completa.', 'error');
                     }
