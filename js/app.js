@@ -54,7 +54,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Scrollspy: destaca no menu a seção visível
 (function () {
     const links = document.querySelectorAll('.nav-link');
-    const sections = ['home', 'nutricao', 'moda', 'sobre', 'contato']
+    const sections = ['home', 'nutricao', 'moda', 'collab-bulking', 'marcas', 'sobre', 'contato']
         .map(id => document.getElementById(id)).filter(Boolean);
     if (!links.length || !sections.length) return;
 
@@ -146,6 +146,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     reveal('.stat-item', { y: 20, opacity: 0, stagger: 0.1, duration: 0.6 }, '.stats', 'top 95%');
     reveal('.about-img', { x: 40, opacity: 0, duration: 1 }, '#sobre', 'top 70%');
 
+    reveal('.collab-card', { y: 40, opacity: 0, duration: 0.9 }, '#collab-bulking', 'top 85%');
+    reveal('.collab-item', { y: 30, opacity: 0, stagger: 0.12, duration: 0.7 }, '.collab-grid', 'top 90%');
+    reveal('.brands-controls, .brands-counter', { y: 20, opacity: 0, stagger: 0.1 }, '#marcas', 'top 85%');
+    reveal('.brand-chip', { scale: 0.9, opacity: 0, stagger: 0.015, duration: 0.4 }, '.brands-chips-grid', 'top 90%');
+
     reveal('.map-container', { y: 30, opacity: 0 }, '#contato', 'top 80%');
     reveal('.dark-box, .google-review-card', { x: -30, opacity: 0, stagger: 0.1, duration: 0.7 }, '.contact-grid', 'top 80%');
     reveal('.social-btn', { y: 20, opacity: 0, stagger: 0.1, duration: 0.6 }, '.social-links', 'top 90%');
@@ -212,4 +217,82 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         updateStoreStatus();
     }
     setInterval(updateStoreStatus, 60000);
+})();
+
+
+// ==========================================
+// Diretório de Marcas (Filtros & Busca Dinâmica)
+// ==========================================
+(function initBrandsDirectory() {
+    function setup() {
+        const searchInput = document.getElementById('brand-search-input');
+        const clearBtn = document.getElementById('brand-search-clear');
+        const filterTabs = document.querySelectorAll('.brand-filter-tab');
+        const chips = document.querySelectorAll('.brand-chip');
+        const countEl = document.getElementById('brands-visible-count');
+        const emptyState = document.getElementById('brands-empty-state');
+
+        if (!searchInput || !chips.length) return;
+
+        let activeFilter = 'all';
+        let searchQuery = '';
+
+        function filterBrands() {
+            let visibleCount = 0;
+            const query = searchQuery.trim().toLowerCase();
+
+            chips.forEach(chip => {
+                const name = chip.getAttribute('data-name') || '';
+                const type = chip.getAttribute('data-type') || '';
+
+                const matchesCategory = (activeFilter === 'all') || (type === activeFilter);
+                const matchesSearch = !query || name.includes(query);
+
+                if (matchesCategory && matchesSearch) {
+                    chip.style.display = 'inline-flex';
+                    visibleCount++;
+                } else {
+                    chip.style.display = 'none';
+                }
+            });
+
+            if (countEl) countEl.textContent = visibleCount;
+            if (emptyState) {
+                emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+        }
+
+        searchInput.addEventListener('input', function() {
+            searchQuery = this.value;
+            if (clearBtn) {
+                clearBtn.style.display = searchQuery ? 'block' : 'none';
+            }
+            filterBrands();
+        });
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                searchQuery = '';
+                this.style.display = 'none';
+                searchInput.focus();
+                filterBrands();
+            });
+        }
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                activeFilter = this.getAttribute('data-filter') || 'all';
+                filterBrands();
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setup);
+    } else {
+        setup();
+    }
 })();
