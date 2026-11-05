@@ -228,11 +228,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const searchInput = document.getElementById('brand-search-input');
         const clearBtn = document.getElementById('brand-search-clear');
         const filterTabs = document.querySelectorAll('.brand-filter-tab');
-        const chips = document.querySelectorAll('.brand-chip');
+        const cards = document.querySelectorAll('.brand-grid-card, .brand-chip');
         const countEl = document.getElementById('brands-visible-count');
         const emptyState = document.getElementById('brands-empty-state');
 
-        if (!searchInput || !chips.length) return;
+        if (!searchInput || !cards.length) return;
 
         let activeFilter = 'all';
         let searchQuery = '';
@@ -241,18 +241,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             let visibleCount = 0;
             const query = searchQuery.trim().toLowerCase();
 
-            chips.forEach(chip => {
-                const name = chip.getAttribute('data-name') || '';
-                const type = chip.getAttribute('data-type') || '';
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name') || '';
+                const type = card.getAttribute('data-type') || '';
 
                 const matchesCategory = (activeFilter === 'all') || (type === activeFilter);
                 const matchesSearch = !query || name.includes(query);
 
                 if (matchesCategory && matchesSearch) {
-                    chip.style.display = 'inline-flex';
+                    card.style.display = 'flex';
                     visibleCount++;
                 } else {
-                    chip.style.display = 'none';
+                    card.style.display = 'none';
                 }
             });
 

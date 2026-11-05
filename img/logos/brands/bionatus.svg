@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="grad-10b981" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <path d="M20 8 C12 8 8 16 8 24 C14 24 20 20 20 8 Z" fill="#10b981"/>
+           <path d="M20 14 C26 14 30 20 30 28 C24 28 20 24 20 14 Z" fill="#34d399"/>
+  </g>
+  <text x="65" y="30" fill="#ffffff" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="16" font-weight="900" letter-spacing="0.5">BIONATUS</text>
+  <text x="65" y="44" fill="#10b981" font-family="'Montserrat', 'Arial', sans-serif" font-size="9" font-weight="700" letter-spacing="1.5">LABORATÓRIOS</text>
+</svg>

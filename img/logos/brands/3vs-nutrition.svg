@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="grad-ff1e27" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff1e27" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <rect width="40" height="40" rx="8" fill="#ff1e27" opacity="0.15"/>
+           <path d="M12 12h16v6h-10v4h8v6h-8v6h10" fill="none" stroke="#ff1e27" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="65" y="30" fill="#ffffff" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="16" font-weight="900" letter-spacing="0.5">3VS</text>
+  <text x="65" y="44" fill="#ff1e27" font-family="'Montserrat', 'Arial', sans-serif" font-size="9" font-weight="700" letter-spacing="1.5">NUTRITION</text>
+</svg>
