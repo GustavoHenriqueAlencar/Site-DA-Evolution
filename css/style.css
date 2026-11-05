@@ -1088,29 +1088,48 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
     background: radial-gradient(circle at 50% 0%, rgba(227, 27, 35, 0.04) 0%, transparent 60%), #0d0d0d;
 }
 
-/* Continuous Infinite Brand Marquee Carousel */
+/* Continuous Infinite Brand Marquee Carousel (Dual-Row Opposite Scroll) */
 .brands-marquee-wrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 15px 0 25px 0;
+    padding: 10px 0 30px 0;
     margin-bottom: 45px;
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.brands-marquee-row {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.brands-marquee-row:last-child {
+    margin-bottom: 0;
 }
 
 .brands-marquee-track {
     display: flex;
-    gap: 18px;
+    gap: 16px;
     width: max-content;
-    animation: marqueeScroll 45s linear infinite;
 }
 
-.brands-marquee-wrapper:hover .brands-marquee-track {
+.brands-marquee-track.track-left {
+    animation: marqueeScrollLeft 65s linear infinite;
+}
+
+.brands-marquee-track.track-right {
+    animation: marqueeScrollRight 65s linear infinite;
+}
+
+.brands-marquee-wrapper:hover .brands-marquee-track,
+.brands-marquee-row:hover .brands-marquee-track {
     animation-play-state: paused;
 }
 
-@keyframes marqueeScroll {
+@keyframes marqueeScrollLeft {
     0% {
         transform: translateX(0);
     }
@@ -1119,33 +1138,43 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
     }
 }
 
+@keyframes marqueeScrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .brand-carousel-card {
-    flex: 0 0 190px;
-    height: 120px;
+    flex: 0 0 200px;
+    width: 200px;
+    height: 125px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(18, 18, 18, 0.85);
+    background: rgba(18, 18, 18, 0.88);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 14px 12px;
+    border-radius: 12px;
+    padding: 12px 10px;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
     box-sizing: border-box;
 }
 
 .brand-carousel-card:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-4px) scale(1.02);
     border-color: rgba(227, 27, 35, 0.8);
     background: rgba(26, 26, 26, 0.98);
-    box-shadow: 0 10px 25px rgba(227, 27, 35, 0.25);
+    box-shadow: 0 8px 24px rgba(227, 27, 35, 0.25);
 }
 
 /* Shared Brand Card Logo & Title Styles */
 .brand-card-logo-wrap {
-    height: 52px;
+    height: 56px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -1155,11 +1184,11 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
 }
 
 .brand-card-img {
-    max-height: 46px;
+    max-height: 48px;
     max-width: 82%;
     object-fit: contain;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
 }
 
 .brand-carousel-card:hover .brand-card-img,
@@ -1170,9 +1199,9 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
 .brand-card-title {
     font-size: 0.78rem;
     font-weight: 700;
-    color: #e2e8f0;
+    color: #f1f5f9;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
     text-align: center;
     width: 100%;
     white-space: nowrap;
@@ -1189,14 +1218,15 @@ footer { padding: 50px 0; text-align: center; border-top: 1px solid #222; color:
 .brand-card-badge {
     font-size: 0.65rem;
     font-weight: 600;
-    color: #888888;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 4px;
+    letter-spacing: 0.4px;
+    margin-top: 3px;
     transition: color 0.25s ease;
 }
 
-.brand-grid-card:hover .brand-card-badge {
+.brand-grid-card:hover .brand-card-badge,
+.brand-carousel-card:hover .brand-card-badge {
     color: var(--primary-color);
 }
 
