@@ -157,18 +157,23 @@
             try {
                 const data = JSON.parse(event.data);
                 if (data.type === 'WA_EMBEDDED_SIGNUP') {
-                    addLog('✅ Evento WA_EMBEDDED_SIGNUP recebido da Meta!', 'success');
                     console.log('Dados completos recebidos:', data);
+                    addLog(`Evento da Meta: ${data.event}`, data.event === 'CANCEL' ? 'error' : 'info');
+                    addLog(`Dados: ${JSON.stringify(data.data)}`);
 
-                    const wabaId = data.data?.waba_id || data.data?.wabaId || 'Identificado';
-                    const phoneId = data.data?.phone_number_id || data.data?.phoneNumberId || 'Identificado';
+                    const wabaId = data.data?.waba_id || data.data?.wabaId || '-';
+                    const phoneId = data.data?.phone_number_id || data.data?.phoneNumberId || '-';
 
                     document.getElementById('resWabaId').textContent = wabaId;
                     document.getElementById('resPhoneId').textContent = phoneId;
 
-                    addLog(`WABA ID: ${wabaId}`, 'success');
-                    addLog(`Phone Number ID: ${phoneId}`, 'success');
-                    addLog('🎉 Coexistência ativada com sucesso! Agora você pode atualizar esses dados no application.properties se necessário.', 'success');
+                    if (data.event === 'FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING') {
+                        addLog('🎉 Coexistência concluída (WABA ID recebido).', 'success');
+                    } else if (data.event === 'FINISH') {
+                        addLog('⚠️ Evento FINISH comum (fluxo de número novo, NÃO é coexistência). Não verifique o número por SMS/ligação.', 'error');
+                    } else if (data.event === 'CANCEL') {
+                        addLog('Fluxo cancelado no popup.', 'error');
+                    }
                 }
             } catch (err) {
                 // Mensagens não-JSON ignoradas
@@ -213,7 +218,7 @@
                     appId: appId,
                     autoLogAppEvents: true,
                     xfbml: true,
-                    version: 'v20.0'
+                    version: 'v23.0'
                 });
 
                 addLog(`Disparando FB.login com Configuration ID: ${configId} e featureType: whatsapp_business_app_onboarding...`);
@@ -230,9 +235,9 @@
                     response_type: 'code',
                     override_default_response_type: true,
                     extras: {
+                        setup: {},
                         featureType: 'whatsapp_business_app_onboarding',
-                        sessionInfoVersion: '3',
-                        version: 'v4'
+                        sessionInfoVersion: '3'
                     }
                 });
 
