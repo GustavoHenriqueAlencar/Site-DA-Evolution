@@ -34,7 +34,7 @@
             <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl flex items-start gap-3">
                 <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
                 <div class="text-xs md:text-sm text-amber-800 leading-relaxed">
-                    <strong>Atenção:</strong> Esta página deve ser acessada via <strong>HTTPS</strong> (ex: pelo link do seu ngrok ou domínio com SSL). Preencha os campos abaixo com os dados obtidos no <em>Meta for Developers</em> e clique no botão de conexão.
+                    <strong>Atenção:</strong> Abra esta página via <strong>HTTPS</strong> (ex: pelo link do seu ngrok ou domínio com SSL) e preencha os dados do <em>Meta for Developers</em>. O <strong>backend (Spring + ngrok) precisa estar no ar antes de clicar em Conectar</strong>, porque o code expira rápido e a sincronização do histórico só pode ser pedida uma vez.
                 </div>
             </div>
 
@@ -61,6 +61,19 @@
                                class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
                     </div>
                 </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1" for="backendUrl">
+                        URL do backend (onde o Spring está):
+                    </label>
+                    <input type="text" id="backendUrl" placeholder="https://seu-dominio.ngrok-free.dev"
+                           class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+                </div>
+
+                <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer">
+                    <input type="checkbox" id="autoSend" checked class="w-4 h-4 accent-emerald-600">
+                    Enviar ao backend automaticamente ao concluir
+                </label>
             </div>
 
             <!-- Botão de Ação -->
@@ -98,6 +111,11 @@
                 <div class="bg-slate-900 text-emerald-400 p-4 rounded-xl font-mono text-xs overflow-x-auto max-h-56 space-y-1" id="logConsole">
                     <p class="text-slate-500">// Aguardando interação...</p>
                 </div>
+
+                <button id="btnResend" type="button" onclick="resendToBackend()"
+                        class="text-xs text-slate-500 hover:text-slate-700 underline underline-offset-2">
+                    Reenviar ao backend manualmente
+                </button>
             </div>
 
             <!-- Guia de passos rápidos -->
@@ -133,6 +151,26 @@
         if (storedAppId) document.getElementById('appId').value = storedAppId;
         if (storedConfigId) document.getElementById('configId').value = storedConfigId;
 
+        // Backend e envio automático (persistidos no localStorage)
+        function lsGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+        function lsSet(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* ignora */ } }
+        (function initBackendFields() {
+            const urlEl = document.getElementById('backendUrl');
+            const autoEl = document.getElementById('autoSend');
+            let stored = lsGet('coex_backend_url');
+            if (!stored) {
+                const h = location.hostname;
+                if (h !== 'daevolution.com.br' && h !== 'www.daevolution.com.br' && location.origin && location.origin !== 'null') {
+                    stored = location.origin;
+                }
+            }
+            if (stored) urlEl.value = stored;
+            const storedAuto = lsGet('coex_auto_send');
+            if (storedAuto !== null) autoEl.checked = storedAuto === 'true';
+            urlEl.addEventListener('change', function () { lsSet('coex_backend_url', urlEl.value.trim()); });
+            autoEl.addEventListener('change', function () { lsSet('coex_auto_send', String(autoEl.checked)); });
+        })();
+
         function addLog(msg, type = 'info') {
             const consoleEl = document.getElementById('logConsole');
             const resultBox = document.getElementById('resultBox');
@@ -150,9 +188,76 @@
             consoleEl.scrollTop = consoleEl.scrollHeight;
         }
 
+        // Estado em memória do onboarding (o code é de uso único)
+        const onboardState = { code: null, wabaId: null, phoneNumberId: null, sent: false };
+        let codeReceivedAt = null;
+
+        function getBackendUrl() {
+            return document.getElementById('backendUrl').value.trim().replace(/\/+$/, '');
+        }
+
+        // Envia code + waba_id ao backend (a troca do code exige o App Secret, que fica só no servidor)
+        async function trySendToBackend(force = false) {
+            if (!force) {
+                if (!document.getElementById('autoSend').checked) return;
+                if (!onboardState.code || !onboardState.wabaId) return;
+                if (onboardState.sent) return;
+            } else if (!onboardState.code || !onboardState.wabaId) {
+                addLog('❌ Ainda não há code e WABA ID para enviar. Conclua o fluxo no popup da Meta primeiro.', 'error');
+                return;
+            }
+
+            const backend = getBackendUrl();
+            if (!backend) {
+                addLog('❌ Informe a URL do backend (onde o Spring está) para enviar o code. Depois use o botão "Reenviar ao backend manualmente".', 'error');
+                return;
+            }
+            lsSet('coex_backend_url', backend);
+
+            if (force && codeReceivedAt && Date.now() - codeReceivedAt > 60000) {
+                addLog('⚠️ O code foi recebido há mais de 60 s e pode já ter expirado ou sido usado.', 'error');
+            }
+
+            // Marca ANTES do fetch: nunca reenvia sozinho, nem em caso de erro
+            onboardState.sent = true;
+            addLog(`Enviando code e WABA ID ao backend (${backend}/api/coex/onboard)...`);
+
+            try {
+                const resp = await fetch(backend + '/api/coex/onboard', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
+                    body: JSON.stringify({
+                        code: onboardState.code,
+                        wabaId: onboardState.wabaId,
+                        phoneNumberId: onboardState.phoneNumberId
+                    })
+                });
+                if (!resp.ok) {
+                    throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+                }
+                const result = await resp.json();
+                (result.steps || []).forEach(function (step) {
+                    if (step.ok) addLog(`✅ ${step.name} — ${step.detail}`, 'success');
+                    else addLog(`❌ ${step.name} — ${step.detail}`, 'error');
+                });
+                if (result.ok) {
+                    addLog('Mantenha o app WhatsApp Business ABERTO no celular e toque em Confirmar para compartilhar o histórico.', 'success');
+                } else {
+                    addLog('❌ O backend concluiu com falha parcial. Confira os passos acima antes de usar o botão manual (o code é de uso único).', 'error');
+                }
+            } catch (err) {
+                addLog(`❌ Falha ao enviar ao backend: ${err.message}`, 'error');
+                addLog('Verifique a URL do backend, se o ngrok e o Spring estão no ar e o CORS. O envio automático não será repetido: após conferir, use o botão "Reenviar ao backend manualmente" abaixo.', 'error');
+            }
+        }
+
+        function resendToBackend() {
+            trySendToBackend(true);
+        }
+
         // Listener para capturar o evento do Embedded Signup retornado pelo popup
         window.addEventListener('message', function (event) {
-            if (!event.origin.includes('facebook.com')) return;
+            if (event.origin !== 'https://www.facebook.com' && event.origin !== 'https://web.facebook.com') return;
 
             try {
                 const data = JSON.parse(event.data);
@@ -166,6 +271,14 @@
 
                     document.getElementById('resWabaId').textContent = wabaId;
                     document.getElementById('resPhoneId').textContent = phoneId;
+
+                    const evWaba = data.data?.waba_id || data.data?.wabaId;
+                    const evPhone = data.data?.phone_number_id || data.data?.phoneNumberId;
+                    if (data.event === 'FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING' || evWaba) {
+                        if (evWaba) onboardState.wabaId = evWaba;
+                        if (evPhone) onboardState.phoneNumberId = evPhone;
+                        trySendToBackend();
+                    }
 
                     if (data.event === 'FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING') {
                         addLog('🎉 Coexistência concluída (WABA ID recebido).', 'success');
@@ -211,6 +324,13 @@
             localStorage.setItem('meta_app_id', appId);
             localStorage.setItem('meta_config_id', configId);
 
+            // Novo popup = novo code (de uso unico): zera o estado para o envio automatico valer de novo
+            onboardState.code = null;
+            onboardState.wabaId = null;
+            onboardState.phoneNumberId = null;
+            onboardState.sent = false;
+            codeReceivedAt = null;
+
             addLog(`Inicializando FB SDK com App ID: ${appId}...`);
 
             try {
@@ -218,7 +338,7 @@
                     appId: appId,
                     autoLogAppEvents: true,
                     xfbml: true,
-                    version: 'v23.0'
+                    version: 'v27.0'
                 });
 
                 addLog(`Disparando FB.login com Configuration ID: ${configId} e featureType: whatsapp_business_app_onboarding...`);
@@ -226,7 +346,12 @@
                 FB.login(function(response) {
                     if (response.authResponse) {
                         const code = response.authResponse.code;
-                        addLog(`Autenticação autorizada! Código de autorização recebido: ${code}`, 'success');
+                        addLog(`Autenticação autorizada! Código de autorização recebido: ${code ? code.substring(0, 15) + '...' : 'OK'}`, 'success');
+                        if (code) {
+                            onboardState.code = code;
+                            codeReceivedAt = Date.now();
+                            trySendToBackend();
+                        }
                     } else {
                         addLog('O fluxo foi cancelado ou fechado sem autorização completa.', 'error');
                     }
